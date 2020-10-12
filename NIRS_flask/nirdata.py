@@ -19,7 +19,7 @@ class Nir(object):
         self.cursor.close()
         self.conn.close()
     
-    def get_customers_infos_limit(self):#读取数据库
+    def get_customers_infos_limit(self):#读取数据库中customer信息
         sql = 'select * from customers limit 3'
         self.cursor.execute(sql)
         data = []
