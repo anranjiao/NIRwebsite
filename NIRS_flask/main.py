@@ -1,5 +1,6 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify,request
 from nirdata import Nir
+import json
 
 """
 接口说明：
@@ -32,6 +33,44 @@ def get_nirs_cates():
     }
     return jsonify(resData)
 
+@app.route('/products', methods=['POST'])
+def get_cates_infos():
+    if request.method == 'POST':
+        print("捕获到post请求nirs_cate")
+        get_data = json.loads(request.get_data(as_text = True))
+        key = get_data['key']
+        secretKey = get_data['secretKey']
+        print(key,secretKey)
+        if key == 'newest':
+            #select * from orders order by order_date desc;
+            nir = Nir()
+            sql_data = nir.get_newest_costumers_5()
+            resData = {
+                "resCode": 0,
+                "data": sql_data,
+                "message": '最新的5个订单'
+            }
+            return jsonify(resData)
+            
+        elif key == 'most':
+            #select * from customers order by points DESC;
+            pass
+        else:
+            resData = {
+                "resCode": 2,
+                "data": [],
+                "message": '参数错误'
+            }
+            return jsonify(resData)
+
+        return
+    else:
+        resData = {
+        "resCode": 1,
+        "data": [],
+        "message": '请求方法错误'
+        }
+        return jsonify(resData)
 
 @app.route('/', methods = ['GET','POST'])
 def hello_world():

@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
+import HomeCate from "../views/HomeCate.vue"
 
 Vue.use(VueRouter);
 
@@ -9,10 +10,15 @@ const routes = [
     path: "/",
     name: "Home",
     component: Home
-  },
-  
-];
+  }, 
 
+  //板块分类页面
+{
+  path:"/:cate_id",
+  name:"HomeCate",
+  component: HomeCate
+}
+];
 
 
 

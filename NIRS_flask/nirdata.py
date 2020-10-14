@@ -28,3 +28,13 @@ class Nir(object):
             data.append(temp)
         
         return data
+    
+    def get_newest_costumers_5(self):
+        sql = 'select * from orders order by order_date desc limit 8'
+        self.cursor.execute(sql)
+        data = []
+        for temp in self.cursor.fetchall():
+            print(temp)
+            data.append(temp)
+        
+        return data

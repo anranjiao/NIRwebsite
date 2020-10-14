@@ -7,7 +7,7 @@
 
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav>
-          <b-nav-item v-for="item in headData.headers" :key="item.id" href="item.url">{{item.text}}</b-nav-item>
+          <b-nav-item v-for="item in headData.headers" :key="item.id" :href="item.url">{{item.text}}</b-nav-item>
             <!-- <b-nav-item href="#">首页</b-nav-item>
             <b-nav-item href="#">数据分析</b-nav-item>
             <b-nav-item href="#">产品购买</b-nav-item>
