@@ -24,13 +24,23 @@ class Nir(object):
         self.cursor.execute(sql)
         data = []
         for temp in self.cursor.fetchall():
-            print(temp)
+            #print(temp)
             data.append(temp)
         
         return data
     
-    def get_newest_costumers_5(self):
+    def get_newest_costumers_8(self):
         sql = 'select * from orders order by order_date desc limit 8'
+        self.cursor.execute(sql)
+        data = []
+        for temp in self.cursor.fetchall():
+            #print(temp)
+            data.append(temp)
+        
+        return data
+    
+    def get_most_products_8(self):
+        sql = 'select name,quantity_in_stock from products order by quantity_in_stock limit 7;'
         self.cursor.execute(sql)
         data = []
         for temp in self.cursor.fetchall():
@@ -38,3 +48,5 @@ class Nir(object):
             data.append(temp)
         
         return data
+    
+     

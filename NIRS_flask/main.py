@@ -27,7 +27,6 @@ def get_nirs_cates():
             {"id":2,"text":'产品购买',"url":'/products'},
             {"id":3,"text":'学习专区',"url":'/learn'},
             {"id":4,"text":'联系我们',"url":'/contact'},
-            {"id":5,"text":'个人中心',"url":'/user'},
         ],
     "message": '对本次请求的说明'
     }
@@ -44,17 +43,25 @@ def get_cates_infos():
         if key == 'newest':
             #select * from orders order by order_date desc;
             nir = Nir()
-            sql_data = nir.get_newest_costumers_5()
+            sql_data = nir.get_newest_costumers_8()
             resData = {
                 "resCode": 0,
                 "data": sql_data,
-                "message": '最新的5个订单'
+                "message": '最新的8个订单'
             }
             return jsonify(resData)
             
         elif key == 'most':
             #select * from customers order by points DESC;
-            pass
+            nir = Nir()
+            sql_data_most = nir.get_most_products_8()
+            resData = {
+                "resCode": 0,
+                "data": sql_data_most,
+                "message": '库存最少的8个产品'
+            }
+            return jsonify(resData)
+
         else:
             resData = {
                 "resCode": 2,

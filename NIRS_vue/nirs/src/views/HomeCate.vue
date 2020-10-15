@@ -1,7 +1,7 @@
 <template>
     <div id = "HomeCate">
         <Header />
-        <b-container>
+        <b-container fluid>
             <b-row>
                 <b-col cols = "12" md = "7">
 
@@ -27,7 +27,21 @@
                     
                 </b-col>
                 <b-col cols = "12" md = "4">
-                    <h6>积分排行榜</h6>
+                    <h6>销量榜</h6>
+                        <table role="table" aria-busy="false" aria-colcount="3" class="table b-table table-striped table-hover" ><!----><!---->
+                            <thead role="rowgroup" class=""><!---->
+                            <tr role="row" class="">
+                                <th role="columnheader" scope="col" aria-colindex="1" class=""><div>name</div></th>
+                                <th role="columnheader" scope="col" aria-colindex="2" class=""><div>quantity_in_stock</div></th></tr>
+                            </thead>
+                            <tbody role="rowgroup"><!---->
+                                <tr role="row" v-for="item in items.mostItem" :key="item.id">
+                                <td aria-colindex="1" role="cell" class="" >{{item.name}}</td>
+                                <td aria-colindex="2" role="cell" class="">{{item.quantity_in_stock}}</td></tr>
+                                
+                            </tbody><!---->
+                        </table>
+                        
                 </b-col>
             </b-row>
         </b-container>
@@ -58,18 +72,26 @@ export default {
             key:'newest'
         })
 
-        const items = reactive({
-            newestItem:[]
-        })
+        
 
         const mostParams = reactive({
             url: now_url.value,
             key:'most'
         })
 
+        const items = reactive({
+            newestItem:[],
+            mostItem:[]
+        })
+
         GetInfoPost(newstParams).then(resp => {
-            console.log("resp.data.data",resp.data.data);
+            //console.log("resp.data.data",resp.data.data);
             items.newestItem = resp.data.data
+        });
+
+        GetInfoPost(mostParams).then(resp => {
+            console.log("most resp.data.data",resp.data.data);
+            items.mostItem = resp.data.data
         });
 
         onMounted(()=>{
